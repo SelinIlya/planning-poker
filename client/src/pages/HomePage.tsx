@@ -4,7 +4,7 @@ import { connectSocket, getSocket } from '@/sockets/socket'
 
 export default function HomePage() {
   const [name, setName] = useState('')
-  const [category, setCategory] = useState<'Front' | 'Back' | 'QA' | 'Mobile' | 'Visitor' | ''>('')
+  const [category, setCategory] = useState<'Front' | 'Back' | 'QA' | 'Mobile' | 'TMC' | 'Visitor' | ''>('')
   const [creating, setCreating] = useState(false)
   const navigate = useNavigate()
 
@@ -47,6 +47,7 @@ export default function HomePage() {
           <option value="Back">Back</option>
           <option value="QA">QA</option>
           <option value="Mobile">Mobile</option>
+          <option value="TMC">TMC</option>
           <option value="Visitor">Visitor</option>
         </select>
         <div className="flex gap-3">

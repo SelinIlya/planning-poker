@@ -146,6 +146,7 @@ export default function RoomPage() {
             <option value="Back">Back</option>
             <option value="QA">QA</option>
             <option value="Mobile">Mobile</option>
+            <option value="TMC">TMC</option>
             <option value="Visitor">Visitor</option>
           </select>
           <button
@@ -263,6 +264,7 @@ function EditParticipantModal({ participant, onSave, onCancel }: { participant: 
             <option value="QA">QA</option>
             <option value="Mobile">Mobile</option>
             <option value="Visitor">Visitor</option>
+            <option value="TMC">TMC</option>
           </select>
           <div className="flex gap-3">
             <button
