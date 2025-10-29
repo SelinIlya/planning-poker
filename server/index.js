@@ -3,6 +3,7 @@ import http from "http";
 import cors from "cors";
 import { Server as SocketIOServer } from "socket.io";
 import { createRoomStore } from "./rooms.js";
+import pkg from "./package.json" assert { type: "json" };
 
 const PORT = process.env.PORT || 3001;
 const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN || "http://localhost:5173";
@@ -106,7 +107,9 @@ io.on("connection", (socket) => {
 app.get("/health", (_req, res) => res.json({ ok: true }));
 
 httpServer.listen(PORT, () => {
-  console.log(`Planning Poker server listening on http://localhost:${PORT}`);
+  console.log(
+    `Planning Poker server v${pkg.version} listening on http://localhost:${PORT}`
+  );
 });
 
 
