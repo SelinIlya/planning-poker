@@ -9,7 +9,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 // Node ESM supports JSON import assertions
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import pkg from './package.json' assert { type: 'json' }
+import pkg from './package.json' with { type: 'json' }
 
 export default defineConfig({
   plugins: [react()],
