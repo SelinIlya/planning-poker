@@ -173,6 +173,8 @@ export function createRoomStore() {
     isHost,
     exists,
     getPublicState,
+    // internal accessor for special cases (e.g., claim_host)
+    getInternal: (roomId) => rooms.get(roomId),
   };
 }
 

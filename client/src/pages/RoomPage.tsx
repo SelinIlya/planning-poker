@@ -32,6 +32,12 @@ export default function RoomPage() {
     const handleReconnect = () => {
       if (joined && name && category) {
         socket.emit('join_room', { roomId, name, category }, () => {})
+        try {
+          const flag = localStorage.getItem(`pp_host_${roomId}`)
+          if (flag) {
+            socket.emit('claim_host', { roomId })
+          }
+        } catch {}
       }
     }
     socket.on('connect', handleReconnect)

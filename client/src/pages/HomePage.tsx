@@ -13,6 +13,7 @@ export default function HomePage() {
     setCreating(true)
     const socket = connectSocket()
     socket.emit('create_room', { name, category }, ({ roomId }: { roomId: string }) => {
+      try { localStorage.setItem(`pp_host_${roomId}`, '1') } catch {}
       navigate(`/room/${roomId}`, { state: { name, category } })
     })
   }

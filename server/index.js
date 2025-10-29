@@ -80,6 +80,18 @@ io.on("connection", (socket) => {
     if (ok) io.to(roomId).emit("state", rooms.getPublicState(roomId));
   });
 
+  // Allow reclaiming host if previous host socket left
+  socket.on("claim_host", ({ roomId }) => {
+    const state = rooms.getInternal(roomId);
+    if (!state) return;
+    const currentHostSocketId = state.hostId;
+    const hostStillPresent = currentHostSocketId && state.participants.has(currentHostSocketId);
+    if (!hostStillPresent) {
+      state.hostId = socket.id;
+      io.to(roomId).emit("state", rooms.getPublicState(roomId));
+    }
+  });
+
   socket.on("disconnect", () => {
     const affectedRooms = rooms.leaveAll(socket.id);
     for (const roomId of affectedRooms) {
