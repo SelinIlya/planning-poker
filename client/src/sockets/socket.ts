@@ -1,7 +1,9 @@
 import { io, Socket } from 'socket.io-client'
 import type { RoomState, VoteValue } from '@/types'
 
-const SERVER_URL = import.meta.env.VITE_SERVER_URL ?? 'http://localhost:3001'
+// If VITE_SERVER_URL is not set, use same-origin (behind Nginx)
+const RAW_URL = (import.meta as any)?.env?.VITE_SERVER_URL as string | undefined
+const SERVER_URL = RAW_URL && RAW_URL.trim().length > 0 ? RAW_URL.trim() : undefined
 
 let socket: Socket | null = null
 
