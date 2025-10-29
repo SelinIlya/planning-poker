@@ -1,9 +1,11 @@
 import { io, Socket } from 'socket.io-client'
 import type { RoomState, VoteValue } from '@/types'
 
-// If VITE_SERVER_URL is not set, use same-origin (behind Nginx)
+// Prefer same-origin in production behind Nginx; env can override for local dev
 const RAW_URL = (import.meta as any)?.env?.VITE_SERVER_URL as string | undefined
-const SERVER_URL = RAW_URL && RAW_URL.trim().length > 0 ? RAW_URL.trim() : undefined
+const ENV_URL = RAW_URL && RAW_URL.trim().length > 0 ? RAW_URL.trim() : undefined
+const SHOULD_FORCE_SAME_ORIGIN = typeof window !== 'undefined' && !!window.location && window.location.hostname !== 'localhost'
+const SERVER_URL = SHOULD_FORCE_SAME_ORIGIN ? undefined : ENV_URL
 
 let socket: Socket | null = null
 
